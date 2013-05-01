@@ -1,7 +1,9 @@
 asset-buddy
 ========
 
-Express.js view helper for including css or js tags!
+Express.js view helper for including css or js tags! Supports easy syntax and bundle aliases for groups of files.
+
+This module is focused on simplicity and flexibility for the frontend, and is backend-agnostic - use whatever tools you want to process your asset files and get them into place. 
 
 
 Installation
@@ -69,20 +71,20 @@ This Stuff Doesn't Work Yet:
 Bundles
 ---
 
-Asset Buddy supports bundles, which are really just special codenames that can be mapped to whatever file(s) you want.
+Asset Buddy supports bundles, which are really just special aliases that can be mapped to whatever file(s) you want.
 
 In development mode, load up the bundles with your uncompressed assets:
 
-  var bundleObj = {
-    css: {
-      app: ['base', 'skin', 'custom']
-      custom: "custom"
-    },  
-    js: {
-      head: ['jquery', 'common'], 
-      footer: ['carousel', 'modernizr', 'popup']
+    var bundleObj = {
+      css: {
+        app: ['base', 'skin', 'custom']
+        custom: "custom"
+      },  
+      js: {
+        head: ['jquery', 'common'], 
+        footer: ['carousel', 'modernizr', 'popup']
+      }
     }
-  }
   
 In production mode, give the bundles the compressed and concat'd version, with a cachebuster too:
 
@@ -123,7 +125,7 @@ This plugin is made to work as a companion for Asset Smasher. Integration notes 
 Inspiration
 ---
 
-- [Sails.js](http://sails.js) and Asset Rack
-- Nap
-- Connect Assets
-- Asset Smasher!          
+- [Sails.js](http://sails.js) and [Asset Rack](https://github.com/techpines/asset-rack)
+- [Nap](https://github.com/craigspaeth/nap)
+- [Connect Assets](https://github.com/adunkman/connect-assets)
+- [Asset Smasher](https://github.com/jriecken/asset-smasher)
