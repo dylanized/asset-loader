@@ -1,7 +1,7 @@
 asset-loader
 ========
 
-Express.js view helper for including css or js tags! Supports easy syntax and bundle aliases for groups of files.
+Express.js view helper for including css or js tags! Supports easy syntax, plus bundle aliases for groups of files and cachebusting.
 
 This module is focused on simplicity and flexibility for the frontend, and is backend-agnostic - use whatever tools you want to process your asset files and get them into place. The intention is to be completely decoupled from the asset preprocessors.
 
@@ -11,7 +11,7 @@ Installation
 
 Load up the module in your app.js:
 
-    var assets = require('asset-Loader');
+    var assets = require('asset-loader');
     assets.init(app.locals);
 
 Configuration
