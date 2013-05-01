@@ -120,13 +120,14 @@ Here is the complete config option and its defaults:
 
     {
       root: '/assets',			// default assets root
-      defaultCSS: 'app',
-      defaultJS:
+	  defaultAsset: 'app'
       bundles: null,
       helperName: 'assets', 	// the name of the main view helper
       xhtml: true     			// closing slashes on link tags for xml compatibility
-      rootCSS: null,			// these override the default root
-      rootJS: null
+      rootCSS: null,			// these override root
+      rootJS: null,
+      defaultCSS: null,			// these override defaultAsset
+      defaultJS: null     
     }  
 
                       
@@ -137,7 +138,7 @@ Inspiration
 - [Nap](https://github.com/craigspaeth/nap)
 - [Connect Assets](https://github.com/adunkman/connect-assets)
 - [Asset Smasher](https://github.com/jriecken/asset-smasher)
-- [RequireJS]()
+- [RequireJS](http://requirejs.org/)
 
 
 Todo
