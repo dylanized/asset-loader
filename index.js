@@ -32,7 +32,7 @@ exports.init = function(locals, params) {
 		}
 		
 		// trim ext
-		if (path.extname(req)) req.replace(path.extname, '');
+		if (path.extname(req)) req.replace(path.extname(req), '');
 		
 		// turn req into array
 		var reqArr = arrayd(req);
@@ -112,7 +112,8 @@ exports.init = function(locals, params) {
 	}
 	tag.JS = function(src) {
 		return '<script type="text/javascript" src="' + src + '"></script>';
-	}		
+	}
+			
 	// set locals 	
 	locals.assets = new assetRouter;	
 	locals.js = locals.assets.js;
