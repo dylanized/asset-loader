@@ -28,11 +28,8 @@ Use for Single Files
 All of these:
 
     <%- assets.css() %>
-
     <%- assets.css('app') %>
-
     <%- assets.css('app.css') %>
-
     <%- css('app') %>
     
 print out this:
@@ -42,11 +39,8 @@ print out this:
 And all of these:
 
     <%- assets.js() %>
-
     <%- assets.css('app') %>
-
     <%- assets.css('app.js') %>
-
     <%- js('app') %>
 
 print out this:
@@ -60,7 +54,6 @@ Use for Multiple Files
 Both of these:
 
     <%- assets.css('base, skin, custom') %>
-
     <%- assets.css(['base', 'skin', 'custom']) %>
 
 print out these:
