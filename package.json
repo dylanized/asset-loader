@@ -1,12 +1,17 @@
 {
   "name": "asset-loader",
   "description": "Express.js view helper for including style or script tags! Has an easy syntax and supports 'bundle aliases' for grouping files together.",
-  "version": "0.1.1",
+  "author": "Dylan Hassinger <d@dylanized.com>",
+  "version": "0.1.2",
   "keywords": [
     "assets",
     "pipeline",
     "require"
-  ],  
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dylanized/asset-loader.git"
+  },    
   "dependencies": {
     "path": "~0.4.9",
     "nconf": "~0.6.7"
