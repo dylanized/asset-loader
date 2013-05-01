@@ -1,4 +1,4 @@
-// Asset Helper
+// Asset Buddy!
 
 var path = require('path');
 var __ = require('underscore');

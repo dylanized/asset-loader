@@ -69,7 +69,7 @@ This Stuff Doesn't Work Yet:
 Bundles
 ---
 
-Asset Buddy supports bundles, which are really just special asset names that you can map to a different filename - or an array of files.
+Asset Buddy supports bundles, which are really just special codenames that can be mapped to whatever file(s) you want.
 
 In development mode, load up the bundles with your uncompressed assets:
 
@@ -84,7 +84,7 @@ In development mode, load up the bundles with your uncompressed assets:
     }
   }
   
-In production mode, give the bundles the compressed and concat'd version, with a hash too:
+In production mode, give the bundles the compressed and concat'd version, with a cachebuster too:
 
   bundles: {
     css: {
