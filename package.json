@@ -1,7 +1,7 @@
 {
   "name": "asset-loader",
   "description": "Express.js view helper for including style or script tags! Has an easy syntax and supports 'bundle aliases' for grouping files together.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "keywords": [
     "assets",
     "pipeline",

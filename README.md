@@ -36,7 +36,7 @@ All of these:
     
 print out this:
 
-    <link type="stylesheet/css" href="assets/app.css" />    
+    <link type="stylesheet/css" href="/assets/app.css" />    
 
 And all of these:
 
@@ -47,7 +47,7 @@ And all of these:
 
 print out this:
 
-    <script type="text/javascript" src="assets/app.js"></script>
+    <script type="text/javascript" src="/assets/app.js"></script>
     
 
 Load Multiple Files
@@ -60,9 +60,9 @@ Both of these:
 
 print out these:
 
-    <link type="stylesheet/css" href="assets/base.css" />
-    <link type="stylesheet/css" href="assets/skin.css" />
-    <link type="stylesheet/css" href="assets/custom.css" />  
+    <link type="stylesheet/css" href="/assets/base.css" />
+    <link type="stylesheet/css" href="/assets/skin.css" />
+    <link type="stylesheet/css" href="/assets/custom.css" />  
       
 
 Bundles
@@ -121,9 +121,9 @@ Here is the complete config option and its defaults:
     {
       root: '/assets',			// default assets root
 	  defaultAsset: 'app'
-      bundles: null,
-      helperName: 'assets', 	// the name of the main view helper
-      xhtml: true     			// closing slashes on link tags for xml compatibility
+      bundles: null,			// bundle object
+      helperName: 'assets',		// the name of the main view helper
+      xhtml: true,				// closing slashes on link tags for xml compatibility
       rootCSS: null,			// these override root
       rootJS: null,
       defaultCSS: null,			// these override defaultAsset
