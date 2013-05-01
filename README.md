@@ -21,7 +21,7 @@ By default, assets are expected to be in the /assets folder and the default asse
 
 Override like this:
 
-    assets.init(app.locals, {prefix: '/tmp', def: 'index'});
+    assets.init(app.locals, {root: '/tmp', defaultAsset: 'index'});
     
 
 Load Single Files
@@ -139,10 +139,3 @@ Inspiration
 - [Connect Assets](https://github.com/adunkman/connect-assets)
 - [Asset Smasher](https://github.com/jriecken/asset-smasher)
 - [RequireJS](http://requirejs.org/)
-
-
-Todo
----
-
-- load nconf for defaults
-- override with passed in obj
