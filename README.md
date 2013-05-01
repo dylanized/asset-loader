@@ -1,9 +1,9 @@
-asset-buddy
+asset-loader
 ========
 
 Express.js view helper for including css or js tags! Supports easy syntax and bundle aliases for groups of files.
 
-This module is focused on simplicity and flexibility for the frontend, and is backend-agnostic - use whatever tools you want to process your asset files and get them into place. 
+This module is focused on simplicity and flexibility for the frontend, and is backend-agnostic - use whatever tools you want to process your asset files and get them into place. The intention is to be completely decoupled from the asset preprocessors.
 
 
 Installation
@@ -11,7 +11,7 @@ Installation
 
 Load up the module in your app.js:
 
-    var assets = require('asset-buddy');
+    var assets = require('asset-Loader');
     assets.init(app.locals);
 
 Configuration
@@ -65,10 +65,10 @@ print out these:
     <link type="stylesheet/css" href="assets/custom.css" />  
       
 
-Load Bundles
+Bundles
 ---
 
-Asset Buddy supports bundles, which are really just special aliases that can be mapped to whatever file(s) you want.
+Asset Loader supports bundles, which are really just special aliases that can be mapped to whatever file(s) you want.
 
 In development mode, load up the bundles with your uncompressed assets:
 
@@ -100,7 +100,7 @@ Pass in your bundle object like this:
 
     assets.init(app.locals, { bundles: bundleObj });	
 	
-It's up to you to take care of processing the files and naming them. Asset Buddy just gets those names and takes it from there. You can pass the bundlers filenames with or without an extension.      
+It's up to you to take care of processing the files and naming them. Asset Loader just gets those names and takes it from there. You can pass the bundlers filenames with or without an extension.      
 
 In the views, call your bundles like other assets. All these would work:
 
@@ -110,7 +110,7 @@ In the views, call your bundles like other assets. All these would work:
     <%- assets.js('head') %>			<!-- head js bundle -->
     <%- js('footer.js') %>				<!-- footer js bundle -->
         
-Asset Buddy always checks for a bundle before it prints out the filename.    
+Asset Loader always checks for a bundle before it prints out the filename.    
 
 
 All Options
@@ -119,11 +119,14 @@ All Options
 Here is the complete config option and its defaults:
 
     {
-      prefix: '/assets',
-      def: 'app',
+      root: '/assets',			// default assets root
+      defaultCSS: 'app',
+      defaultJS:
       bundles: null,
       helperName: 'assets', 	// the name of the main view helper
-      xhtml5: true     			// closing slashes on link tags
+      xhtml: true     			// closing slashes on link tags for xml compatibility
+      rootCSS: null,			// these override the default root
+      rootJS: null
     }  
 
                       
@@ -134,6 +137,7 @@ Inspiration
 - [Nap](https://github.com/craigspaeth/nap)
 - [Connect Assets](https://github.com/adunkman/connect-assets)
 - [Asset Smasher](https://github.com/jriecken/asset-smasher)
+- [RequireJS]()
 
 
 Todo

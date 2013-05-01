@@ -1,4 +1,14 @@
 {
-	"name": "AssetBuddy",
-	"version": "0.0.1"
+  "name": "asset-loader",
+  "description": "Express.js view helper for including style or script tags! Has an easy syntax and supports 'bundle aliases' for grouping files together.",
+  "version": "0.1.0",
+  "keywords": [
+    "assets",
+    "pipeline",
+    "require"
+  ],  
+  "dependencies": {
+    "path": "~0.4.9",
+    "nconf": "~0.6.7"
+  }
 }

@@ -1,6 +1,6 @@
 {
-	"prefix": "/assets",
-	"index": "app",
+	"root": "/assets",
+	"defaultAsset": "app",
 	"bundles": null,
-	"xhtml5": "/"
+	"xhtml": "/"
 }
