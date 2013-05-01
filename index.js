@@ -5,6 +5,9 @@ var nconf = require('nconf');
 
 exports.init = function(locals, params) {
 
+	// load params
+	nconf.overrides(params);
+
 	// load param defaults
 	nconf.file({ file: path.join(__dirname, 'config.json') });	
 	
@@ -26,16 +29,25 @@ exports.init = function(locals, params) {
 		
 		// trim ext
 		if (path.extname(req)) req.replace(path.extname, '');
+		
+		// turn req into array
+		var reqArr = arrayd(req);
 
 		// check for matching bundle
 		var bundles = nconf.get('bundles');
+		var name = "";
+		var match = "";
+
 		if (bundles) {
-			var match = bundles[ext][req];
-			if (match) req = match;
-		}		
-		
+			for (var i=0;i<reqArr.length;i++) {
+				name = reqArr[i];				
+				match = bundles[ext][name];
+				if (match) reqArr[i] = match;
+			}
+		}
+			
 		// get tags
-		return getTags(arrayd(req), ext);	
+		return getTags(reqArr, ext);	
 					
 	}
 	
@@ -43,24 +55,37 @@ exports.init = function(locals, params) {
 	function getTags(arr, ext) {
 	
 		// set vars
-		var src = "";
-		var tag = "";
+		var item = "";
 		var html = "";
 		
 		// loop through files
 		for (var i=0;i<arr.length;i++) {
-			// figure out src
-			src = path.join(nconf.get('prefix'), arr[i] + '.' + ext);
-			// figure out tag
-			if (ext === "css") tag = cssTag(src);
-			if (ext === "js") tag = jsTag(src);
-			// add to html buffer
-			html += tag;
+
+			item = arr[i];
+			
+			if (item instanceof Array) {			
+				// non-concatenated bundle
+				for (var j=0; j<item.length;j++) {
+					html += singleTag(item[j], ext);
+				}				
+			} else {
+				// single file
+				html += singleTag(item, ext);
+			}
+			
 		}
 		
 		// return tags
 		return html;
 		
+	}
+	
+	// single tag builder
+	function singleTag(item, ext) {
+		var src = path.join(nconf.get('prefix'), item + '.' + ext);
+		if (ext === "css") var tag = cssTag(src);
+		else if (ext === "js") var tag = jsTag(src);
+		return tag;
 	}
 	
 	// helpers	
