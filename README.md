@@ -63,11 +63,8 @@ print out these:
     <link type="stylesheet/css" href="assets/base.css" />
     <link type="stylesheet/css" href="assets/skin.css" />
     <link type="stylesheet/css" href="assets/custom.css" />  
-    
-    
-This Stuff Doesn't Work Yet:
-===    
-    
+      
+
 Bundles
 ---
 
@@ -113,8 +110,21 @@ In the views, call your bundles like other assets. All these would work:
     <%- assets.js('head') %>			<!-- head js bundle -->
     <%- js('footer.js') %>				<!-- footer js bundle -->
         
-Asset Buddy always checks for a bundle before it prints out the filename.      
-  
+Asset Buddy always checks for a bundle before it prints out the filename.    
+
+All Options
+---
+
+Here is the complete config option and its defaults:
+
+    {
+      prefix: '/assets',
+      def: 'app',
+      bundles: null,
+      helperName: 'assets', 	// the name of the main view helper
+      xhtml5: true     			// closing slashes on link tags
+    }  
+
            
 Asset Smasher Integration
 ---
