@@ -39,8 +39,8 @@ print out this:
 And all of these:
 
     <%- assets.js() %>
-    <%- assets.css('app') %>
-    <%- assets.css('app.js') %>
+    <%- assets.js('app') %>
+    <%- assets.js('app.js') %>
     <%- js('app') %>
 
 print out this:
