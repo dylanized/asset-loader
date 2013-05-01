@@ -1,30 +1,14 @@
-// Asset Buddy!
+// Hi, I'm Asset Buddy!
 
 var path = require('path');
-var __ = require('underscore');
+var nconf = require('nconf');
 
 exports.init = function(locals, params) {
 
-	// param defaults
+	// load param defaults
+	nconf.file({ file: path.join(__dirname, 'config.json') });	
 	
-	var prefix = '/assets';
-	var def = 'app';
-	var bundles;
-	var xhtml5 = "/";
-
-	// handle passed in parameters
-	if (params) {
-	 
-		if (params.prefix) prefix = params.prefix;
-		if (params.def) def = params.def;
-		bundles = params.bundles;
-		
-		if (!params.xhtml5) xhtml5 = "";
-		else xhtml5 = "/";
-		
-	}
-
-	// assets view helper	
+	// asset router	
 	function assetRouter() {	
 		this.css = function(req) {
 			return getBundle(req, "css");
@@ -37,28 +21,25 @@ exports.init = function(locals, params) {
 	// get bundle
 	function getBundle(req, ext) {
 	
-		this.ext = ext;
-
 		// fallback to default
-		if (!req) req = def;
+		if (!req) req = nconf.get('index');
 		
 		// trim ext
 		if (path.extname(req)) req.replace(path.extname, '');
 
 		// check for matching bundle
+		var bundles = nconf.get('bundles');
 		if (bundles) {
 			var match = bundles[ext][req];
 			if (match) req = match;
 		}		
-					
-		// convert request to an array if needed	
-		var arr = arrayd(req);
 		
 		// get tags
-		return getTags(arr, ext);	
+		return getTags(arrayd(req), ext);	
 					
 	}
 	
+	// get tags
 	function getTags(arr, ext) {
 	
 		// set vars
@@ -69,7 +50,7 @@ exports.init = function(locals, params) {
 		// loop through files
 		for (var i=0;i<arr.length;i++) {
 			// figure out src
-			src = path.join(prefix, arr[i] + '.' + ext);
+			src = path.join(nconf.get('prefix'), arr[i] + '.' + ext);
 			// figure out tag
 			if (ext === "css") tag = cssTag(src);
 			if (ext === "js") tag = jsTag(src);
@@ -82,14 +63,17 @@ exports.init = function(locals, params) {
 		
 	}
 	
-	// helpers
+	// helpers	
 	function arrayd(arg) {
+		// if array
 		if (arg instanceof Array) return arg;
+		// or csv
 		else if (arg.search(',') > -1) return (arg.replace(/\s/g, "")).split(',');
+		// else wrap in array
 		else return [arg];
 	}
 	function cssTag(src) {
-		return '<link rel="stylesheet" type="text/css" href="' + src + '" ' + xhtml5 + '>';
+		return '<link rel="stylesheet" type="text/css" href="' + src + '" ' + nconf.get('xhtml5') + '>';
 	}
 	function jsTag(src) {
 		return '<script type="text/javascript" src="' + src + '"></script>';
