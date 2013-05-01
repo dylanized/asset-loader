@@ -87,7 +87,8 @@ exports.init = function(locals, params) {
 	}	
 	// single tag builder
 	function singleTag(item, ext) {		
-		var src = path.join(getRoot(ext), item + '.' + ext);
+		if (!path.extname(item)) item += ('.' + ext);
+		var src = path.join(getRoot(ext), item);
 		return tag[ext.toUpperCase()](src);
 	}
 	
