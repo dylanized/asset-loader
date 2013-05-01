@@ -74,7 +74,7 @@ In development mode, load up the bundles with your uncompressed assets:
 
     var bundleObj = {
       css: {
-        app: ['base', 'skin', 'custom']
+        app: ['base', 'skin', 'custom'],
         custom: "custom"
       },  
       js: {
@@ -126,13 +126,7 @@ Here is the complete config option and its defaults:
       xhtml5: true     			// closing slashes on link tags
     }  
 
-           
-Asset Smasher Integration
----
-
-This plugin is made to work as a companion for Asset Smasher. Integration notes coming soon...
-
-           
+                      
 Inspiration
 ---
 
@@ -140,3 +134,10 @@ Inspiration
 - [Nap](https://github.com/craigspaeth/nap)
 - [Connect Assets](https://github.com/adunkman/connect-assets)
 - [Asset Smasher](https://github.com/jriecken/asset-smasher)
+
+
+Todo
+---
+
+- load nconf for defaults
+- override with passed in obj
