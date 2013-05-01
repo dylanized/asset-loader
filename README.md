@@ -73,7 +73,7 @@ Asset Buddy supports bundles, which are really just special codenames that can b
 
 In development mode, load up the bundles with your uncompressed assets:
 
-  bundles: {
+  var bundleObj = {
     css: {
       app: ['base', 'skin', 'custom']
       custom: "custom"
@@ -86,18 +86,21 @@ In development mode, load up the bundles with your uncompressed assets:
   
 In production mode, give the bundles the compressed and concat'd version, with a cachebuster too:
 
-  bundles: {
-    css: {
-      app: "app-kjhdky2r8ud2woidchjkwjd",
-      custom: "custom-kljhdfwiufoi3jdlknd"
-    },  
-    js: {
-      head: "head-kjdfksjhdflsdkjsldkfj", 
-      footer: "footer-kcjhidiwuhewdioune"
+    var bundleObj = {
+      css: {
+    	  app: "app-kjhdky2r8ud2woidchjkwjd",
+    	  custom: "custom-kljhdfwiufoi3jdlknd"
+      },  
+      js: {
+        head: "head-kjdfksjhdflsdkjsldkfj", 
+        footer: "footer-kcjhidiwuhewdioune"
+      }
     }
-  } 
-  
+     
+Pass in your bundle object like this:
 
+    assets.init(app.locals, { bundles: bundleObj });	
+	
 It's up to you to take care of processing the files and naming them. Asset Buddy just gets those names and takes it from there. You can pass the bundlers filenames with or without an extension.      
 
 In the views, call your bundles like other assets. All these would work:
@@ -114,14 +117,8 @@ Asset Buddy always checks for a bundle before it prints out the filename.
 Asset Smasher Integration
 ---
 
-This plugin is made to work as a companion for Asset Smasher. Here's how to set it up...
+This plugin is made to work as a companion for Asset Smasher. Integration notes coming soon...
 
-By default, assets are expected to be in the /assets folder and the default asset name is 'app'.
-
-Override like this:
-
-    assets.init(app.locals, {prefix: '/tmp', def: 'index'});
-    
            
 Inspiration
 ---
