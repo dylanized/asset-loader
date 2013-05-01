@@ -11,7 +11,7 @@ Installation
 
 Load up the module in your app.js:
 
-    var assets = require('asset-helper');
+    var assets = require('asset-buddy');
     assets.init(app.locals);
 
 Configuration
@@ -24,7 +24,7 @@ Override like this:
     assets.init(app.locals, {prefix: '/tmp', def: 'index'});
     
 
-Use for Single Files
+Load Single Files
 ---
 
 All of these:
@@ -50,7 +50,7 @@ print out this:
     <script type="text/javascript" src="assets/app.js"></script>
     
 
-Use for Multiple Files
+Load Multiple Files
 ---
 
 Both of these:
@@ -65,7 +65,7 @@ print out these:
     <link type="stylesheet/css" href="assets/custom.css" />  
       
 
-Bundles
+Load Bundles
 ---
 
 Asset Buddy supports bundles, which are really just special aliases that can be mapped to whatever file(s) you want.
@@ -111,6 +111,7 @@ In the views, call your bundles like other assets. All these would work:
     <%- js('footer.js') %>				<!-- footer js bundle -->
         
 Asset Buddy always checks for a bundle before it prints out the filename.    
+
 
 All Options
 ---
