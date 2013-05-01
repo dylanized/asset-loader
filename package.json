@@ -2,7 +2,7 @@
   "name": "asset-loader",
   "description": "Express.js view helper for including style or script tags! Has an easy syntax and supports 'bundle aliases' for grouping files together.",
   "author": "Dylan Hassinger <d@dylanized.com>",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "keywords": [
     "assets",
     "pipeline",
