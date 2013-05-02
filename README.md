@@ -1,10 +1,9 @@
 asset-loader
 ========
 
-Express.js view helper for including css or js tags! Supports easy syntax, plus bundle aliases for groups of files and cachebusting.
+Express.js view helper for including css or js tags. Includes bundle system for managing groups of files.
 
-This module is focused on simplicity and flexibility for the frontend, and is backend-agnostic - use whatever tools you want to process your asset files and get them into place. The intention is to be completely decoupled from the asset preprocessors.
-
+This module is backend-agnostic - use any tool to preprocess your asset files and get them into place. Once they are in place, feed the filenames to the Asset Loader and then use the helpers to render your tags.
 
 Installation
 ---
@@ -13,6 +12,7 @@ Load up the module in your app.js:
 
     var assets = require('asset-loader');
     assets.init(app.locals);
+
 
 Configuration
 ---
@@ -27,23 +27,25 @@ Override like this:
 Load Single Files
 ---
 
-Here's some examples of the view helpers, and what they output:
+Here's how to use the view helpers:
 
 The long-form helper:
 
-    <%- assets.css('common') %>				<link type="stylesheet/css" href="/assets/common.css" />    
-	<%- assets.js('jquery') %>    			<script type="text/javascript" src="/assets/query.js"></script>
-        
-Or the shortcut versions:
+    <%- css('common') %>		outputs: <link type="stylesheet/css" href="/assets/common.css" />    
+	<%- js('jquery') %>			outputs: <script type="text/javascript" src="/assets/query.js"></script>
+        	
+If no filename is given, they default to the "app" filename. (This can be changed in the settings.)
 
-	<%- css('common') %>
-	<%- js('jquery') %>
-	
-If no filename is given, the helpers default to the "app" filename. (This can be changed in the settings.)
-
-    <%- assets.css() %>				<link type="stylesheet/css" href="/assets/app.css" />    		
-    <%- assets.js() %>				<script type="text/javascript" src="/assets/app.js"></script>
+    <%- css() %>				<link type="stylesheet/css" href="/assets/app.css" />    		
+    <%- js() %>					<script type="text/javascript" src="/assets/app.js"></script>
         
+By default, asset loads files relative to the "root" setting (set to "/assets" by default). This can be changed in the settings.
+
+Override the default root altogether by giving a full path (or URL) to your file:
+
+    <%- css('/styles/common') %>
+    <%- js('http://somedomain.com/jquery.min.js') %>
+
 
 Load Multiple Files
 ---
