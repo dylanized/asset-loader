@@ -27,55 +27,47 @@ Override like this:
 Load Single Files
 ---
 
-All of these:
+Here's some examples of the view helpers, and what they output:
 
-    <%- assets.css() %>
-    <%- assets.css('app') %>
-    <%- assets.css('app.css') %>
-    <%- css('app') %>
-    
-print out this:
+The long-form helper:
 
-    <link type="stylesheet/css" href="/assets/app.css" />    
+    <%- assets.css('common') %>				<link type="stylesheet/css" href="/assets/common.css" />    
+	<%- assets.js('jquery') %>    			<script type="text/javascript" src="/assets/query.js"></script>
+        
+Or the shortcut versions:
 
-And all of these:
+	<%- css('common') %>
+	<%- js('jquery') %>
+	
+If no filename is given, the helpers default to the "app" filename. (This can be changed in the settings.)
 
-    <%- assets.js() %>
-    <%- assets.js('app') %>
-    <%- assets.js('app.js') %>
-    <%- js('app') %>
-
-print out this:
-
-    <script type="text/javascript" src="/assets/app.js"></script>
-    
+    <%- assets.css() %>				<link type="stylesheet/css" href="/assets/app.css" />    		
+    <%- assets.js() %>				<script type="text/javascript" src="/assets/app.js"></script>
+        
 
 Load Multiple Files
 ---
 
-Both of these:
+Load multiple files, one after another, like this:
 
     <%- assets.css('base, skin, custom') %>
+    
+Or like this:    
+    
     <%- assets.css(['base', 'skin', 'custom']) %>
-
-print out these:
-
-    <link type="stylesheet/css" href="/assets/base.css" />
-    <link type="stylesheet/css" href="/assets/skin.css" />
-    <link type="stylesheet/css" href="/assets/custom.css" />  
-      
+          
 
 Bundles
 ---
 
-Asset Loader supports bundles, which are really just special aliases that can be mapped to whatever file(s) you want.
+Asset Loader supports bundles, which are special aliases that can be mapped to whatever file(s) you want.
 
 In development mode, load up the bundles with your uncompressed assets:
 
     var bundleObj = {
       css: {
         app: ['base', 'skin', 'custom'],
-        custom: "custom"
+        custom: ['custom']
       },  
       js: {
         head: ['jquery', 'common'], 
@@ -102,13 +94,13 @@ Pass in your bundle object like this:
 	
 It's up to you to take care of processing the files and naming them. Asset Loader just gets those names and takes it from there. You can pass the bundlers filenames with or without an extension.      
 
-In the views, call your bundles like other assets. All these would work:
+In the views, call your bundles just like other assets:
 
     <%- css() %>						<!-- app css bundle -->
     <%- css('custom') %>				<!-- custom css bundle -->
     	
     <%- assets.js('head') %>			<!-- head js bundle -->
-    <%- js('footer.js') %>				<!-- footer js bundle -->
+    <%- js('footer') %>					<!-- footer js bundle -->
         
 Asset Loader always checks for a bundle before it prints out the filename.    
 
@@ -127,7 +119,7 @@ Here is the complete config option and its defaults:
       rootCSS: null,			// these override root
       rootJS: null,
       defaultCSS: null,			// these override defaultAsset
-      defaultJS: null     
+      defaultJS: null
     }  
 
                       

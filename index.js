@@ -1,7 +1,8 @@
 // Asset Loader
 
-var path = require('path');
-var nconf = require('nconf');
+var path = require('path'),
+	nconf = require('nconf'),
+	__ = require('underscore');
 
 exports.init = function(locals, params) {
 
@@ -13,11 +14,11 @@ exports.init = function(locals, params) {
 	
 	// asset router	
 	function assetRouter() {	
-		this.css = function(req) {
-			return getBundle(req, "css");
+		this.css = function() {
+			return getBundle(arguments, "css");
 		}
-		this.js = function(req) {
-			return getBundle(req, "js");
+		this.js = function() {
+			return getBundle(arguments, "js");
 		}
 	}
 
@@ -31,12 +32,8 @@ exports.init = function(locals, params) {
 			else req = nconf.get("defaultAsset");
 		}
 		
-		// trim ext
-		if (path.extname(req)) req.replace(path.extname(req), '');
+		var reqArr = arrayd(req);			
 		
-		// turn req into array
-		var reqArr = arrayd(req);
-
 		// check for matching bundle
 		var bundles = nconf.get('bundles');
 		var name = "";
@@ -94,10 +91,19 @@ exports.init = function(locals, params) {
 	
 	// helpers
 	function arrayd(arg) {
+		console.log(JSON.stringify(arg));
 		// if array
 		if (arg instanceof Array) return arg;
+		// if object
+		else if (__.isObject(arg)) {
+			console.log('hello');
+			return __.toArray(arg);
+		}
 		// or comma separated list
-		else if (arg.search(',') > -1) return (arg.replace(/\s/g, "")).split(',');
+		else if (arg.search(',') > -1) {
+			console.log('hello2');		
+			return (arg.replace(/\s/g, "")).split(',');
+		}
 		// else wrap in array
 		else return [arg];
 	}
