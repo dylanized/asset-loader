@@ -108,18 +108,18 @@ Asset Loader always checks for a bundle before it prints out the filename.
 All Options
 ---
 
-Here is the complete config option and its defaults:
+Here is the complete config object and its defaults:
 
     {
       root: '/assets',			// default assets root
-	  defaultAsset: 'app'
+	  defaultAsset: 'app',		// default asset filename
       bundles: null,			// bundle object
       helperName: 'assets',		// the name of the main view helper
       xhtml: true,				// closing slashes on link tags for xml compatibility
-      rootCSS: null,			// these override root
-      rootJS: null,
-      defaultCSS: null,			// these override defaultAsset
-      defaultJS: null
+      rootCSS: null,			// overrides root
+      rootJS: null,				// overrides root
+      defaultCSS: null,			// overrides defaultAsset
+      defaultJS: null			// overrides defaultAsset
     }  
 
                       
@@ -131,3 +131,11 @@ Inspiration
 - [Connect Assets](https://github.com/adunkman/connect-assets)
 - [Asset Smasher](https://github.com/jriecken/asset-smasher)
 - [RequireJS](http://requirejs.org/)
+
+
+Contact
+---
+
+Got ideas? Email d@dylanized.com
+
+[Please follow me on Twitter](http://twitter.com/dylanized)
