@@ -5,6 +5,8 @@ var path = require('path'),
 	
 exports.init = function(locals, params) {
 
+	"use strict";
+
 	// load params
 	nconf.overrides(params);
 
@@ -12,23 +14,29 @@ exports.init = function(locals, params) {
 	nconf.file({ file: path.join(__dirname, 'config.json') });	
 	
 	// asset router	
-	function assetRouter() {	
+	function AssetRouter() {
 		this.css = function() {
 			return getBundle(arguments, "css");
-		}
+		};
 		this.js = function() {
 			return getBundle(arguments, "js");
-		}
+		};
 	}
 
 	// get bundle
 	function getBundle(args, ext) {
 	
+		// convert arguments into normal array
 		var argsArr = Array.prototype.slice.call(args);
+		
+		var reqArr = [];
 	
 		// if no argument, fallback to default
-		if (argsArr.length == 0) var reqArr = [getDefaultAsset(ext)];
-		else var reqArr = parseArgs(argsArr);			
+		if (argsArr.length === 0) {
+			reqArr = [getDefaultAsset(ext)];
+		} else {
+			reqArr = parseArgs(argsArr);
+		}
 		
 		// check for matching bundle
 		var bundles = nconf.get('bundles');
@@ -49,7 +57,7 @@ exports.init = function(locals, params) {
 		return getTags(reqArr, ext);	
 					
 	}
-	
+
 	// get asset tags
 	function getTags(arr, ext) {
 	
@@ -81,13 +89,13 @@ exports.init = function(locals, params) {
 	// single tag builder
 	function singleTag(item, ext) {		
 		if (!path.extname(item)) item += ('.' + ext);
-		var src = path.join(getRoot(ext), item);
+		var src = path.join(getPrefix(ext), item);
 		return tag[ext.toUpperCase()](src);
 	}
 	
 	// helpers
 	function parseArgs(args) {
-		var outputArr = new Array;
+		var outputArr = [];
 		args.forEach(function(arg) {
 			// if argument is an array of assets
 			if (arg instanceof Array) outputArr = arg;
@@ -105,24 +113,24 @@ exports.init = function(locals, params) {
 		// else return defaultAsset
 		else return(nconf.get("defaultAsset"));
 	}
-	function getRoot(ext) {
-		var rootName = "root" + ext.toUpperCase();
-		if (nconf.get(rootName) != null) return nconf.get(rootName);
-		else return nconf.get('root'); 
+	function getPrefix(ext) {
+		var prefixName = "prefix" + ext.toUpperCase();
+		if (nconf.get(prefixName) != null) return nconf.get(prefixName);
+		else return nconf.get('prefix'); 
 	}
 	var tag = {};
 	tag.CSS = function(src) {
-		return '<link rel="stylesheet" type="text/css" href="' + src + '" ' + nconf.get('xhtml') + '>\n';
+		return '<link rel="stylesheet" type="text/css" href="' + src + '" ' + nconf.get('xhtml') + '>';
 		// add \n for line breaks
-	}
+	};
 	tag.JS = function(src) {
 		return '<script type="text/javascript" src="' + src + '"></script>';
 		// add \n for line breaks
-	}
-			
-	// set locals 	
-	locals.assets = new assetRouter;	
+	};
+
+	// set locals
+	locals.assets = new AssetRouter();
 	locals.js = locals.assets.js;
 	locals.css = locals.assets.css;
-	
-}
+
+};

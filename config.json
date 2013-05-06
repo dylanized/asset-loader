@@ -1,5 +1,5 @@
 {
-	"root": "/assets",
+	"prefix": "/assets",
 	"defaultAsset": "app",
 	"bundles": null,
 	"xhtml": "/"
