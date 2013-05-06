@@ -1,9 +1,8 @@
 // Asset Loader
 
 var path = require('path'),
-	nconf = require('nconf'),
-	__ = require('underscore');
-
+	nconf = require('nconf');
+	
 exports.init = function(locals, params) {
 
 	// load params
@@ -23,16 +22,13 @@ exports.init = function(locals, params) {
 	}
 
 	// get bundle
-	function getBundle(req, ext) {
+	function getBundle(args, ext) {
 	
-		// fallback to default
-		if (!req) {
-			var defaultExt = nconf.get("default" + ext.toUpperCase());
-			if (defaultExt) req = defaultExt;
-			else req = nconf.get("defaultAsset");
-		}
-		
-		var reqArr = arrayd(req);			
+		var argsArr = Array.prototype.slice.call(args);
+	
+		// if no argument, fallback to default
+		if (argsArr.length == 0) var reqArr = [getDefaultAsset(ext)];
+		else var reqArr = parseArgs(argsArr);			
 		
 		// check for matching bundle
 		var bundles = nconf.get('bundles');
@@ -54,7 +50,7 @@ exports.init = function(locals, params) {
 					
 	}
 	
-	// get tags
+	// get asset tags
 	function getTags(arr, ext) {
 	
 		// set vars
@@ -90,22 +86,24 @@ exports.init = function(locals, params) {
 	}
 	
 	// helpers
-	function arrayd(arg) {
-		console.log(JSON.stringify(arg));
-		// if array
-		if (arg instanceof Array) return arg;
-		// if object
-		else if (__.isObject(arg)) {
-			console.log('hello');
-			return __.toArray(arg);
-		}
-		// or comma separated list
-		else if (arg.search(',') > -1) {
-			console.log('hello2');		
-			return (arg.replace(/\s/g, "")).split(',');
-		}
-		// else wrap in array
-		else return [arg];
+	function parseArgs(args) {
+		var outputArr = new Array;
+		args.forEach(function(arg) {
+			// if argument is an array of assets
+			if (arg instanceof Array) outputArr = arg;
+			// else if a comma separated string
+			else if (arg.search(',') > -1) outputArr = (arg.replace(/\s/g, "")).split(',');
+			// else its a single string
+			else outputArr.push(arg);
+		});
+		return outputArr;
+	}
+	function getDefaultAsset(ext) {
+		// check if there a defaultCSS or defaultJS set
+		var extDefault = nconf.get("default" + ext.toUpperCase());
+		if (extDefault) return extDefault;
+		// else return defaultAsset
+		else return(nconf.get("defaultAsset"));
 	}
 	function getRoot(ext) {
 		var rootName = "root" + ext.toUpperCase();
@@ -114,10 +112,12 @@ exports.init = function(locals, params) {
 	}
 	var tag = {};
 	tag.CSS = function(src) {
-		return '<link rel="stylesheet" type="text/css" href="' + src + '" ' + nconf.get('xhtml') + '>';
+		return '<link rel="stylesheet" type="text/css" href="' + src + '" ' + nconf.get('xhtml') + '>\n';
+		// add \n for line breaks
 	}
 	tag.JS = function(src) {
 		return '<script type="text/javascript" src="' + src + '"></script>';
+		// add \n for line breaks
 	}
 			
 	// set locals 	
