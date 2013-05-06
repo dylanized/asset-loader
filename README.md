@@ -21,7 +21,7 @@ By default, assets are expected to be in the /assets folder and the default asse
 
 Override like this:
 
-    assets.init(app.locals, {root: '/tmp', defaultAsset: 'index'});
+    assets.init(app.locals, {prefix: '/tmp', defaultAsset: 'index'});
     
 
 Load Single Files
@@ -113,13 +113,13 @@ All Options
 Here is the complete config object and its defaults:
 
     {
-      root: '/assets',			// default assets root
+      prefix: '/assets',		// default public assets folder
 	  defaultAsset: 'app',		// default asset filename
       bundles: null,			// bundle object
       helperName: 'assets',		// the name of the main view helper
       xhtml: true,				// closing slashes on link tags for xml compatibility
-      rootCSS: null,			// overrides root
-      rootJS: null,				// overrides root
+      prefixCSS: null,			// overrides prefix
+      prefixJS: null,			// overrides prefix
       defaultCSS: null,			// overrides defaultAsset
       defaultJS: null			// overrides defaultAsset
     }  
