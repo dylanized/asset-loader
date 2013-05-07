@@ -43,7 +43,7 @@ By default, asset loads files relative to the "root" setting (set to "/assets" b
 
 Override the default root altogether by giving a full path (or URL) to your file:
 
-    <%- css('/styles/common') %>
+    <%- css('/styles/common.css') %>
     <%- js('http://somedomain.com/jquery.min.js') %>
 
 
