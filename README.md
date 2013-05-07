@@ -5,6 +5,7 @@ Express.js view helper for including css or js tags. Includes bundle system for 
 
 This module is backend-agnostic - use any tool to preprocess your asset files and get them into place. Once they are in place, feed the filenames to the Asset Loader and then use the helpers to render your tags.
 
+
 Installation
 ---
 
@@ -57,14 +58,16 @@ Load multiple files, one after another, like this:
 Or like this:    
     
     <%- css(['base', 'skin', 'custom']) %>
-    
+
+
 Alternate Syntax
 ---
 
 You can also use this syntax:
 
-    <%- assets.css('skin') %>          
-    <%- assets.js('head') %>          
+    <%- assets.css('common') %>          
+    <%- assets.js('footer') %>          
+
 
 Bundles
 ---
@@ -107,7 +110,7 @@ In the views, call your bundles just like other assets:
 
     <%- css() %>						<!-- app css bundle -->
     <%- css('custom') %>				<!-- custom css bundle -->
-    	
+
     <%- js('head') %>					<!-- head js bundle -->
     <%- js('footer') %>					<!-- footer js bundle -->
         
