@@ -145,6 +145,4 @@ Inspiration
 Contact
 ---
 
-Got ideas? Email d@dylanized.com
-
-[Please follow me on Twitter](http://twitter.com/dylanized)
+Got suggestions? [Email](mailto:d@dylanized.com) or [tweet](http://twitter.com/dylanized) me
