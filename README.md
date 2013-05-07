@@ -52,12 +52,19 @@ Load Multiple Files
 
 Load multiple files, one after another, like this:
 
-    <%- assets.css('base, skin, custom') %>
+    <%- css('base, skin, custom') %>
     
 Or like this:    
     
-    <%- assets.css(['base', 'skin', 'custom']) %>
-          
+    <%- css(['base', 'skin', 'custom']) %>
+    
+Alternate Syntax
+---
+
+You can also use this syntax:
+
+    <%- assets.css('skin') %>          
+    <%- assets.js('head') %>          
 
 Bundles
 ---
@@ -101,7 +108,7 @@ In the views, call your bundles just like other assets:
     <%- css() %>						<!-- app css bundle -->
     <%- css('custom') %>				<!-- custom css bundle -->
     	
-    <%- assets.js('head') %>			<!-- head js bundle -->
+    <%- js('head') %>					<!-- head js bundle -->
     <%- js('footer') %>					<!-- footer js bundle -->
         
 Asset Loader always checks for a bundle before it prints out the filename.    
