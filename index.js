@@ -32,11 +32,8 @@ exports.init = function(locals, params) {
 		var reqArr = [];
 	
 		// if no argument, fallback to default
-		if (argsArr.length === 0) {
-			reqArr = [getDefaultAsset(ext)];
-		} else {
-			reqArr = parseArgs(argsArr);
-		}
+		if (argsArr.length === 0) reqArr = [getDefaultAsset(ext)];
+		else reqArr = parseArgs(argsArr);
 		
 		// check for matching bundle
 		var bundles = nconf.get('bundles');
@@ -87,10 +84,12 @@ exports.init = function(locals, params) {
 		
 	}	
 	// single tag builder
-	function singleTag(item, ext) {		
+	function singleTag(item, ext) {
 		if (!path.extname(item)) item += ('.' + ext);
-		var src = path.join(getPrefix(ext), item);
-		return tag[ext.toUpperCase()](src);
+		if ( (item.substring(0, 6) != "/") && (item.substring(0,4) != "http") ) {
+			item = path.join(getPrefix(ext), item);
+		}
+		return tag[ext.toUpperCase()](item);
 	}
 	
 	// helpers
